@@ -1,0 +1,6 @@
+#
+# Files to ignore from git source control
+#
+
+.DS_Store
+xcuserdata/
