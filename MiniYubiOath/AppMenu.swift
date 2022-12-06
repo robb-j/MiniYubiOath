@@ -125,34 +125,34 @@ func getInfo() -> YKInfo {
 //let YK_CHALLENGE_ALL_TAG =
 
 /// https://developers.yubico.com/OATH/YKOATH_Protocol.html#_calculate_all_instruction
-struct APDU {
-    let cla: Int32
-    let ins: Int32
-    let p1: Int32
-    let p2: Int32
-}
-struct Instructions {
-    static let calcAll = APDU(cla: 0x00, ins: 0xa4, p1: 0x00, p2: 0x00)
-}
-struct CalcAllChallenge {
-    var tag: UInt8 = 0x74
-    var value: UInt64
-    init(date: Date) {
-        value = UInt64(date.timeIntervalSinceNow / 30)
-    }
-    mutating func append(data: inout Data) {
-        var binEnd = CFSwapInt64HostToBig(value)
-        var valueSize = UInt8(MemoryLayout.size(ofValue: binEnd))
-        
-        data.append(&tag, count: 1)
-        data.append(&valueSize, count: 1)
-        data.append(&binEnd, count: Int(valueSize))
-    }
-}
+//struct APDU {
+//    let cla: Int32
+//    let ins: Int32
+//    let p1: Int32
+//    let p2: Int32
+//}
+//struct Instructions {
+//    static let calcAll = APDU(cla: 0x00, ins: 0xa4, p1: 0x00, p2: 0x00)
+//}
+//struct CalcAllChallenge {
+//    var tag: UInt8 = 0x74
+//    var value: UInt64
+//    init(date: Date) {
+//        value = UInt64(date.timeIntervalSinceNow / 30)
+//    }
+//    mutating func append(data: inout Data) {
+//        var binEnd = CFSwapInt64HostToBig(value)
+//        var valueSize = UInt8(MemoryLayout.size(ofValue: binEnd))
+//
+//        data.append(&tag, count: 1)
+//        data.append(&valueSize, count: 1)
+//        data.append(&binEnd, count: Int(valueSize))
+//    }
+//}
 
-func appendByte(_ data: inout Data, byte: inout UInt8) {
-    data.append(&byte, count: 1)
-}
+//func appendByte(_ data: inout Data, byte: inout UInt8) {
+//    data.append(&byte, count: 1)
+//}
 
 func getInfo2() {
     guard let manager = TKSmartCardSlotManager.default else { return }
@@ -168,31 +168,54 @@ func getInfo2() {
     guard let card = slot.makeSmartCard() else { return }
     print(card)
     
-    var challenge = CalcAllChallenge(date: Date())
+    // var challenge = CalcAllChallenge(date: Date())
+    let date = Date()
+    let chal = UInt64(date.timeIntervalSince1970 / 30)
     
     var data = Data()
-//    var some = MemoryLayout.size(ofValue: )
-//    appendByte(&data, byte: &challenge.tag)
+    data.append(contentsOf: [
+        0x00, // cla
+        0xa4, // ins
+        0x00, // p1
+        0x00, // p2 (0x01 for truncated)
+        0x0a, // lc
+        0x74, // data[0] / tag
+        0x08, // data[1] / length of challenge
+    ])
     
+    // Swift wouldn't let me put these bytes in the array above
+    data.append(UInt8((chal >>  0) & 0xFF)) // data[2] / challenge[0]
+    data.append(UInt8((chal >>  8) & 0xFF)) // data[3] / challenge[1]
+    data.append(UInt8((chal >> 16) & 0xFF)) // data[4] / challenge[2]
+    data.append(UInt8((chal >> 24) & 0xFF)) // data[5] / challenge[3]
+    data.append(UInt8((chal >> 32) & 0xFF)) // data[6] / challenge[4]
+    data.append(UInt8((chal >> 40) & 0xFF)) // data[7] / challenge[5]
+    data.append(UInt8((chal >> 48) & 0xFF)) // data[8] / challenge[6]
+    data.append(UInt8((chal >> 56) & 0xFF)) // data[9] / challenge[7]
     
-//    data.append(&challenge.tag, count: 1)
-//    data.append(sizeof(Int), count: 1)
-//    data.append(byt)
-    
-    
-    // https://developers.yubico.com/OATH/YKOATH_Protocol.html#_calculate_all_instruction
-//    let cla = 0x00
-//    let ins = 0xa4
-//    let p1 = 0x00
-//    let p2 = 0x00 // 0x1 for truncated
-//    let Lc = 0x00 // length of data
-//    let data = 0x00 // Calculate all data
-    
-//    let now = Date().timeIntervalSince1970
-//    let challengeTime = now / 30
-    
+//    print("Request", data)
+//
 //    card.beginSession { success, error in
-//        if let error = error
+//        if let error = error {
+//            print("Failed to start session", error)
+//            return
+//        }
+//
+//        // TODO: run on a comms queue?
+//        // TODO: some kind of semaphore?
+//
+//        card.transmit(data) { response, error in
+//            if let error = error {
+//                print("Request failed", error)
+//                return
+//            }
+//            guard let response else {
+//                print("No response")
+//                return
+//            }
+//
+//            print("Success", response)
+//        }
 //    }
 }
 
