@@ -17,14 +17,6 @@ struct MiniYubiOathApp: App {
     var body: some Scene {
         MenuBarExtra("MiniYubiOATH", image: "StatusBarImage") {
             AppMenu()
-        }.onChange(of: scenePhase) { newPhase in
-            if newPhase == .active {
-                print("Became active")
-            } else if newPhase == .background {
-                print("Entered background")
-            } else if newPhase == .inactive {
-                print("Became inactive")
-            }
         }
     }
 }
