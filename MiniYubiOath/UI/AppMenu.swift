@@ -9,6 +9,7 @@ import SwiftUI
 
 struct AppMenu: View {
     @EnvironmentObject private var yubi: Yubi
+    @Environment(\.openWindow) private var openWindow
     
     var body: some View {
         if yubi.state != .success {
@@ -24,6 +25,9 @@ struct AppMenu: View {
             }
         }
         Divider()
+        Button("About") {
+            openWindow(id: "about")
+        }
         Button("Quit") { NSApplication.shared.terminate(nil) }
             .keyboardShortcut("q")
     }

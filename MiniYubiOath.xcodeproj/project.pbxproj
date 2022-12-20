@@ -19,6 +19,7 @@
 		D4258D80293A83A200607A5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4258D7F293A83A200607A5B /* Assets.xcassets */; };
 		D4258D83293A83A200607A5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4258D82293A83A200607A5B /* Preview Assets.xcassets */; };
 		D4258D8B293A859500607A5B /* AppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D8A293A859500607A5B /* AppMenu.swift */; };
+		D4E8CBEA29526DA70022CF07 /* About.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CBE929526DA70022CF07 /* About.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +51,7 @@
 		D4258D8A293A859500607A5B /* AppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenu.swift; sourceTree = "<group>"; };
 		D4988924293E9195003955E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		D4A4B7BC293B82D60092ECC9 /* DriverKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DriverKit.framework; path = System/Library/Frameworks/DriverKit.framework; sourceTree = SDKROOT; };
+		D4E8CBE929526DA70022CF07 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 		D41C0E6F295212AA00EB4C54 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D4E8CBE929526DA70022CF07 /* About.swift */,
 				D4258D8A293A859500607A5B /* AppMenu.swift */,
 				D41C0E742952143500EB4C54 /* OathCodeItem.swift */,
 			);
@@ -225,6 +228,7 @@
 				D41C0E782952159900EB4C54 /* OathCode.swift in Sources */,
 				D41C0E6A2952060100EB4C54 /* SelectApplicationAPDU.swift in Sources */,
 				D41C0E6C2952068E00EB4C54 /* CalculateAllAPDU.swift in Sources */,
+				D4E8CBEA29526DA70022CF07 /* About.swift in Sources */,
 				D41C0E682952049A00EB4C54 /* APDU.swift in Sources */,
 				D41C0E73295213E200EB4C54 /* AuthCodeParser.swift in Sources */,
 			);
@@ -355,6 +359,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MiniYubiOath/MiniYubiOath.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
@@ -388,6 +393,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = MiniYubiOath/MiniYubiOath.entitlements;
 				CODE_SIGN_IDENTITY = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
