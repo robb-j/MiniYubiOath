@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-// TODO: update every 30s on-the-30
-// TODO: run USB commands in a serial queue?
-// TODO: lock USB with a semaphore?
-
 struct AppMenu: View {
     @EnvironmentObject private var yubi: Yubi
     

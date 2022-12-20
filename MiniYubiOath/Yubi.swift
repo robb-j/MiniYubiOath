@@ -73,7 +73,7 @@ class Yubi: ObservableObject {
     //    var timer: Timer?
     
 //    func schedule() {
-//        let startDate = Date(timeIntervalSince1970: ceil(Date().timeIntervalSince1970 / 60) * 60)
+//        let startDate = Date(timeIntervalSince1970: ceil(Date().timeIntervalSince1970 / 30) * 30)
 //
 //        let timer = Timer(fire: startDate, interval: 15, repeats: true) { timer in
 //            Task { await self.updateCodes() }
@@ -92,8 +92,6 @@ class Yubi: ObservableObject {
                 print("Failed to select OATH: \(selectApp.sw)")
                 throw SmartCardError.notSupported
             }
-            
-            // TODO: respond to challenge if requested ?
             
             // Calculate all OATH codes
             let calculateAll = try CalculateAllAPDU(truncated: true, timestamp: Date().timeIntervalSince1970).sendTo(card: card)
