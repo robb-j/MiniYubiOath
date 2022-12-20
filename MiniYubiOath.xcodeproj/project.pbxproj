@@ -11,6 +11,10 @@
 		D41C0E682952049A00EB4C54 /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E672952049A00EB4C54 /* APDU.swift */; };
 		D41C0E6A2952060100EB4C54 /* SelectApplicationAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */; };
 		D41C0E6C2952068E00EB4C54 /* CalculateAllAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */; };
+		D41C0E73295213E200EB4C54 /* AuthCodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E72295213E200EB4C54 /* AuthCodeParser.swift */; };
+		D41C0E752952143500EB4C54 /* OathCodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E742952143500EB4C54 /* OathCodeItem.swift */; };
+		D41C0E782952159900EB4C54 /* OathCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E772952159900EB4C54 /* OathCode.swift */; };
+		D41C0E7A2952182100EB4C54 /* Yubi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E792952182100EB4C54 /* Yubi.swift */; };
 		D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */; };
 		D4258D7E293A83A100607A5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D7D293A83A100607A5B /* ContentView.swift */; };
 		D4258D80293A83A200607A5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4258D7F293A83A200607A5B /* Assets.xcassets */; };
@@ -35,6 +39,10 @@
 		D41C0E672952049A00EB4C54 /* APDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APDU.swift; sourceTree = "<group>"; };
 		D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectApplicationAPDU.swift; sourceTree = "<group>"; };
 		D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateAllAPDU.swift; sourceTree = "<group>"; };
+		D41C0E72295213E200EB4C54 /* AuthCodeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCodeParser.swift; sourceTree = "<group>"; };
+		D41C0E742952143500EB4C54 /* OathCodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCodeItem.swift; sourceTree = "<group>"; };
+		D41C0E772952159900EB4C54 /* OathCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCode.swift; sourceTree = "<group>"; };
+		D41C0E792952182100EB4C54 /* Yubi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yubi.swift; sourceTree = "<group>"; };
 		D4258D78293A83A100607A5B /* MiniYubiOath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniYubiOath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniYubiOathApp.swift; sourceTree = "<group>"; };
 		D4258D7D293A83A100607A5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -64,6 +72,7 @@
 				D41C0E672952049A00EB4C54 /* APDU.swift */,
 				D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */,
 				D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */,
+				D41C0E72295213E200EB4C54 /* AuthCodeParser.swift */,
 			);
 			path = SmartCard;
 			sourceTree = "<group>";
@@ -71,8 +80,18 @@
 		D41C0E6F295212AA00EB4C54 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D41C0E742952143500EB4C54 /* OathCodeItem.swift */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		D41C0E762952155100EB4C54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D4258D8A293A859500607A5B /* AppMenu.swift */,
+				D41C0E772952159900EB4C54 /* OathCode.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		D4258D6F293A83A100607A5B = {
@@ -95,12 +114,13 @@
 		D4258D7A293A83A100607A5B /* MiniYubiOath */ = {
 			isa = PBXGroup;
 			children = (
+				D41C0E762952155100EB4C54 /* Models */,
 				D41C0E6F295212AA00EB4C54 /* UI */,
 				D41C0E662952047400EB4C54 /* SmartCard */,
 				D4988924293E9195003955E0 /* Info.plist */,
-				D4258D8A293A859500607A5B /* AppMenu.swift */,
 				D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */,
 				D4258D7D293A83A100607A5B /* ContentView.swift */,
+				D41C0E792952182100EB4C54 /* Yubi.swift */,
 				D4258D7F293A83A200607A5B /* Assets.xcassets */,
 				D4258D84293A83A200607A5B /* MiniYubiOath.entitlements */,
 				D4258D81293A83A200607A5B /* Preview Content */,
@@ -201,12 +221,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D41C0E7A2952182100EB4C54 /* Yubi.swift in Sources */,
 				D4258D8B293A859500607A5B /* AppMenu.swift in Sources */,
 				D4258D7E293A83A100607A5B /* ContentView.swift in Sources */,
 				D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */,
+				D41C0E752952143500EB4C54 /* OathCodeItem.swift in Sources */,
+				D41C0E782952159900EB4C54 /* OathCode.swift in Sources */,
 				D41C0E6A2952060100EB4C54 /* SelectApplicationAPDU.swift in Sources */,
 				D41C0E6C2952068E00EB4C54 /* CalculateAllAPDU.swift in Sources */,
 				D41C0E682952049A00EB4C54 /* APDU.swift in Sources */,
+				D41C0E73295213E200EB4C54 /* AuthCodeParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
