@@ -42,7 +42,7 @@
 		D41C0E742952143500EB4C54 /* OathCodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCodeItem.swift; sourceTree = "<group>"; };
 		D41C0E772952159900EB4C54 /* OathCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCode.swift; sourceTree = "<group>"; };
 		D41C0E792952182100EB4C54 /* Yubi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yubi.swift; sourceTree = "<group>"; };
-		D4258D78293A83A100607A5B /* MiniYubiOath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniYubiOath.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D4258D78293A83A100607A5B /* Yoath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yoath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniYubiOathApp.swift; sourceTree = "<group>"; };
 		D4258D7F293A83A200607A5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4258D82293A83A200607A5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -104,7 +104,7 @@
 		D4258D79293A83A100607A5B /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D4258D78293A83A100607A5B /* MiniYubiOath.app */,
+				D4258D78293A83A100607A5B /* Yoath.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,9 +144,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D4258D77293A83A100607A5B /* MiniYubiOath */ = {
+		D4258D77293A83A100607A5B /* Yoath */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D4258D87293A83A200607A5B /* Build configuration list for PBXNativeTarget "MiniYubiOath" */;
+			buildConfigurationList = D4258D87293A83A200607A5B /* Build configuration list for PBXNativeTarget "Yoath" */;
 			buildPhases = (
 				D4258D74293A83A100607A5B /* Sources */,
 				D4258D75293A83A100607A5B /* Frameworks */,
@@ -157,12 +157,12 @@
 			);
 			dependencies = (
 			);
-			name = MiniYubiOath;
+			name = Yoath;
 			packageProductDependencies = (
 				D41C0E642951F89C00EB4C54 /* OrderedCollections */,
 			);
 			productName = MiniYubiOath;
-			productReference = D4258D78293A83A100607A5B /* MiniYubiOath.app */;
+			productReference = D4258D78293A83A100607A5B /* Yoath.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -196,7 +196,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D4258D77293A83A100607A5B /* MiniYubiOath */,
+				D4258D77293A83A100607A5B /* Yoath */,
 			);
 		};
 /* End PBXProject section */
@@ -365,6 +365,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MiniYubiOath/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Yoath;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -397,6 +398,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MiniYubiOath/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Yoath;
 				INFOPLIST_KEY_LSUIElement = YES;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -424,7 +426,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D4258D87293A83A200607A5B /* Build configuration list for PBXNativeTarget "MiniYubiOath" */ = {
+		D4258D87293A83A200607A5B /* Build configuration list for PBXNativeTarget "Yoath" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D4258D88293A83A200607A5B /* Debug */,
