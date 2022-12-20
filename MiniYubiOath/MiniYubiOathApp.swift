@@ -12,11 +12,12 @@ import SwiftUI
 
 @main
 struct MiniYubiOathApp: App {
-    @Environment(\.scenePhase) var scenePhase
+    @StateObject private var yubi = Yubi()
     
     var body: some Scene {
         MenuBarExtra("MiniYubiOATH", image: "StatusBarImage") {
             AppMenu()
+                .environmentObject(yubi)
         }
     }
 }

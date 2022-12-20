@@ -50,3 +50,16 @@ struct AuthCodeParser: Sequence, IteratorProtocol {
         )
     }
 }
+
+//
+// "Response" (repeats while the first byte is 0x71)
+//
+// nameTag                      | 0x71
+// nameLength                   | (UInt8)
+// name[nameLength]             | (utf8 string)
+// responseTag                  | 0x77 for HOTP, 0x7C for touch, 0x75 for full response or 0x76 for truncated
+// responseLength               | (UInt8) length of the response + 1 (for the digits)
+// digits                       | (UInt8)
+// response[responseLength-1]   | (Int)
+// ...
+//

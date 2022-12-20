@@ -15,13 +15,13 @@ struct OathCodeItem: View {
     var body: some View {
         if oathCodes.count == 1 {
             Button(issuer) {
-                copy(text: "\(oathCodes.first!.otp)")
+                copy(text: oathCodes.first!.otp)
             }
         } else {
             Menu {
                 ForEach(oathCodes) { code in
                     Button(code.account) {
-                        copy(text: "\(code.otp)")
+                        copy(text: code.otp)
                     }
                 }
             } label: {

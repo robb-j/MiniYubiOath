@@ -16,7 +16,6 @@
 		D41C0E782952159900EB4C54 /* OathCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E772952159900EB4C54 /* OathCode.swift */; };
 		D41C0E7A2952182100EB4C54 /* Yubi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E792952182100EB4C54 /* Yubi.swift */; };
 		D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */; };
-		D4258D7E293A83A100607A5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D7D293A83A100607A5B /* ContentView.swift */; };
 		D4258D80293A83A200607A5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4258D7F293A83A200607A5B /* Assets.xcassets */; };
 		D4258D83293A83A200607A5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4258D82293A83A200607A5B /* Preview Assets.xcassets */; };
 		D4258D8B293A859500607A5B /* AppMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D8A293A859500607A5B /* AppMenu.swift */; };
@@ -45,7 +44,6 @@
 		D41C0E792952182100EB4C54 /* Yubi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yubi.swift; sourceTree = "<group>"; };
 		D4258D78293A83A100607A5B /* MiniYubiOath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniYubiOath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniYubiOathApp.swift; sourceTree = "<group>"; };
-		D4258D7D293A83A100607A5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D4258D7F293A83A200607A5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D4258D82293A83A200607A5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D4258D84293A83A200607A5B /* MiniYubiOath.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiniYubiOath.entitlements; sourceTree = "<group>"; };
@@ -80,6 +78,7 @@
 		D41C0E6F295212AA00EB4C54 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				D4258D8A293A859500607A5B /* AppMenu.swift */,
 				D41C0E742952143500EB4C54 /* OathCodeItem.swift */,
 			);
 			path = UI;
@@ -88,7 +87,6 @@
 		D41C0E762952155100EB4C54 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D4258D8A293A859500607A5B /* AppMenu.swift */,
 				D41C0E772952159900EB4C54 /* OathCode.swift */,
 			);
 			path = Models;
@@ -117,10 +115,9 @@
 				D41C0E762952155100EB4C54 /* Models */,
 				D41C0E6F295212AA00EB4C54 /* UI */,
 				D41C0E662952047400EB4C54 /* SmartCard */,
-				D4988924293E9195003955E0 /* Info.plist */,
 				D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */,
-				D4258D7D293A83A100607A5B /* ContentView.swift */,
 				D41C0E792952182100EB4C54 /* Yubi.swift */,
+				D4988924293E9195003955E0 /* Info.plist */,
 				D4258D7F293A83A200607A5B /* Assets.xcassets */,
 				D4258D84293A83A200607A5B /* MiniYubiOath.entitlements */,
 				D4258D81293A83A200607A5B /* Preview Content */,
@@ -223,7 +220,6 @@
 			files = (
 				D41C0E7A2952182100EB4C54 /* Yubi.swift in Sources */,
 				D4258D8B293A859500607A5B /* AppMenu.swift in Sources */,
-				D4258D7E293A83A100607A5B /* ContentView.swift in Sources */,
 				D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */,
 				D41C0E752952143500EB4C54 /* OathCodeItem.swift in Sources */,
 				D41C0E782952159900EB4C54 /* OathCode.swift in Sources */,

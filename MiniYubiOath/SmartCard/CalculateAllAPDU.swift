@@ -14,7 +14,7 @@ class CalculateAllAPDU: APDU {
     let data: Data?
     
     init(truncated: Bool, timestamp: TimeInterval) {
-        p2 = truncated ? 0x00 : 0x01
+        p2 = truncated ? 0x01 : 0x00
         data = Self.calculateData(timestamp: timestamp)
     }
     

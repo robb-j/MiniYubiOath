@@ -9,52 +9,84 @@ import Foundation
 import CryptoTokenKit
 import OrderedCollections
 
+/// https://github.com/Yubico/yubikit-ios/blob/a9c57323fa7ecddaed2d38ddc360fb94ff03503c/YubiKit/YubiKit/Connections/Shared/Errors/YKFAPDUError.h
+struct APDUResult {
+    static let success = 0x9000
+    static let insNotSupported = 0x6D00
+    static let moreData = 0x61 // 0x61XX
+}
+
+
+struct APDUTag {
+    static let name = 0x71
+}
+
 
 @MainActor
 class Yubi: ObservableObject {
     @Published private(set) var oathCodes: OrderedDictionary<String, [OathCode]> = [:]
-    @Published private(set) var message = "Loading…"
+    @Published private(set) var state = State.loading
     
     enum SmartCardError: Error {
         case notSupported
         case notConnected
         case cannotStart
+        case unknown
+        
+        func getMessage() -> String {
+            switch self {
+            case .notSupported: return "Unsupported YubiKey"
+            case .notConnected: return "Not connected"
+            case .cannotStart: return "Failed to connect"
+            case .unknown: return "Something went wrong"
+            }
+        }
+    }
+    enum State {
+        case loading
+        case success
+        case error(SmartCardError)
+        
+        func getMessage() -> String {
+            switch self {
+            case .loading: return "Loading…"
+            case .success: return "Connected"
+            case .error(let error): return error.getMessage()
+            }
+        }
     }
     
-    var timer: Timer?
-    
-    func updateCodes() async {
+    func update() async {
+        state = .loading
         oathCodes = [:]
         do {
             oathCodes = try await readYubiKey()
-            message = "Connected"
-        } catch SmartCardError.notSupported {
-            message = "Unsupported Yubikey"
-        } catch SmartCardError.notConnected {
-            message = "No YubiKey connected"
-        } catch SmartCardError.cannotStart {
-            message = "Failed to connect"
+            state = .success
+        } catch let error as SmartCardError {
+            state = .error(error)
         } catch {
             print(error)
-            message = "Something went wrong"
+            state = .error(.unknown)
         }
     }
     
-    func schedule() {
-        let startDate = Date(timeIntervalSince1970: ceil(Date().timeIntervalSince1970 / 60) * 60)
-        
-        let timer = Timer(fire: startDate, interval: 15, repeats: true) { timer in
-            Task { await self.updateCodes() }
-        }
-        RunLoop.current.add(timer, forMode: .default)
-        self.timer = timer
-    }
+    //    var timer: Timer?
     
+//    func schedule() {
+//        let startDate = Date(timeIntervalSince1970: ceil(Date().timeIntervalSince1970 / 60) * 60)
+//
+//        let timer = Timer(fire: startDate, interval: 15, repeats: true) { timer in
+//            Task { await self.updateCodes() }
+//        }
+//        RunLoop.current.add(timer, forMode: .default)
+//        self.timer = timer
+//    }
+//
     func readYubiKey() async throws -> OrderedDictionary<String, [OathCode]> {
         let oathCodesData = try await runTask { card in
             
             // Select the OATH application on the smart card
-            let selectApp = try card.send(apdu: SelectApplicationAPDU(application: .oath))
+            let selectApp = try SelectApplicationAPDU(application: .oath).sendTo(card: card)
             
             guard selectApp.sw == APDUResult.success else {
                 print("Failed to select OATH: \(selectApp.sw)")
@@ -64,7 +96,7 @@ class Yubi: ObservableObject {
             // TODO: respond to challenge if requested ?
             
             // Calculate all OATH codes
-            let calculateAll = try card.send(apdu: CalculateAllAPDU(truncated: true, timestamp: Date().timeIntervalSince1970))
+            let calculateAll = try CalculateAllAPDU(truncated: true, timestamp: Date().timeIntervalSince1970).sendTo(card: card)
             
             if calculateAll.sw >> 8 == APDUResult.moreData {
                 print("TODO: More data to send...")
