@@ -26,6 +26,7 @@ struct APDUTag {
 class Yubi: ObservableObject {
     @Published private(set) var oathCodes: OrderedDictionary<String, [OathCode]> = [:]
     @Published private(set) var state = State.loading
+    var timer: Timer?
     
     enum SmartCardError: Error {
         case notSupported
@@ -42,7 +43,7 @@ class Yubi: ObservableObject {
             }
         }
     }
-    enum State {
+    enum State: Equatable {
         case loading
         case success
         case error(SmartCardError)
@@ -70,18 +71,17 @@ class Yubi: ObservableObject {
         }
     }
     
-    //    var timer: Timer?
+    func schedule() -> Self {
+        let startDate = Date(timeIntervalSince1970: ceil(Date().timeIntervalSince1970 / 30) * 30)
+
+        let timer = Timer(fire: startDate, interval: 30, repeats: true) { timer in
+            Task { await self.update() }
+        }
+        RunLoop.current.add(timer, forMode: .default)
+        self.timer = timer
+        return self
+    }
     
-//    func schedule() {
-//        let startDate = Date(timeIntervalSince1970: ceil(Date().timeIntervalSince1970 / 30) * 30)
-//
-//        let timer = Timer(fire: startDate, interval: 15, repeats: true) { timer in
-//            Task { await self.updateCodes() }
-//        }
-//        RunLoop.current.add(timer, forMode: .default)
-//        self.timer = timer
-//    }
-//
     func readYubiKey() async throws -> OrderedDictionary<String, [OathCode]> {
         let oathCodesData = try await runTask { card in
             
@@ -118,7 +118,11 @@ class Yubi: ObservableObject {
             }
         }
         
-        output.sort()
+        output.sort { a, b in
+            a.key.localizedStandardCompare(b.key).rawValue < 0
+        }
+        
+        print(output.keys)
         
         return output
     }
@@ -144,7 +148,7 @@ class Yubi: ObservableObject {
         case .muteCard:
             print("Muted card")
         case .validCard:
-            print("Valid card")
+            break
         @unknown default:
             print("Unknown")
         }

@@ -15,7 +15,7 @@ import SwiftUI
 
 @main
 struct MiniYubiOathApp: App {
-    @StateObject private var yubi = Yubi()
+    @StateObject private var yubi = Yubi().schedule()
     
     var body: some Scene {
         MenuBarExtra("MiniYubiOATH", image: "StatusBarImage") {
