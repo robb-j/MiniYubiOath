@@ -122,8 +122,6 @@ class Yubi: ObservableObject {
             a.key.localizedStandardCompare(b.key).rawValue < 0
         }
         
-        print(output.keys)
-        
         return output
     }
     
