@@ -8,13 +8,22 @@
 import SwiftUI
 import RegexBuilder
 import CryptoTokenKit
+import OrderedCollections
 
-struct AuthCode : Identifiable {
+class AuthCode : Identifiable {
     var id: String { account }
     
+    let issuer: String
     let account: String
     let otp: String
     let type: CodeType
+    
+    init(issuer: String, account: String, otp: String, type: CodeType) {
+        self.issuer = issuer
+        self.account = account
+        self.otp = otp
+        self.type = type
+    }
 }
 
 enum CodeType {
@@ -94,15 +103,15 @@ func yubiTask<T>(block: (TKSmartCard) async throws -> T) async throws -> T {
 
 @MainActor
 class Yubi: ObservableObject {
-    @Published private(set) var codes: [AuthCode] = []
+    @Published private(set) var oathCodes: OrderedDictionary<String, [AuthCode]> = [:]
     @Published private(set) var message = "Loading…"
     
     var timer: Timer?
     
     func updateCodes() async {
-        codes = []
+        oathCodes = [:]
         do {
-            codes = try await readYubiKey()
+            oathCodes = try await readYubiKey()
             message = "Connected"
         } catch {
             message = "Not connected"
@@ -119,42 +128,21 @@ class Yubi: ObservableObject {
         self.timer = timer
     }
     
-    func readYubiKey() async throws -> [AuthCode] {
-        let date = Date()
-//        let chal = UInt64(date.timeIntervalSince1970 / 30)
-        let chal = CFSwapInt64HostToBig(UInt64(date.timeIntervalSince1970 / 30));
-        
-        let app = Data([0xA0, 0x00, 0x00, 0x05, 0x27, 0x21, 0x01] as [UInt8])
-        
-        let challenge = Data([
-            0x74, // Data[0] / tag
-            0x08, // Data[1] / length of challenge
+    func readYubiKey() async throws -> OrderedDictionary<String, [AuthCode]> {
+        let oathCodesData = try await yubiTask { card in
             
-            UInt8((chal >>   0) & 0xFF), // Data[2] | challenge[0]
-            UInt8((chal >>   8) & 0xFF), // Data[3] | challenge[1]
-            UInt8((chal >>  16) & 0xFF), // Data[4] | challenge[2]
-            UInt8((chal >>  24) & 0xFF), // Data[5] | challenge[3]
-            UInt8((chal >>  32) & 0xFF), // Data[6] | challenge[4]
-            UInt8((chal >>  40) & 0xFF), // Data[7] | challenge[5]
-            UInt8((chal >>  48) & 0xFF), // Data[8] | challenge[6]
-            UInt8((chal >>  56) & 0xFF), // Data[9] | challenge[7]
-        ] as [UInt8])
-        
-        let codes = try await yubiTask { card in
-            // Select program?
-            let selectApp = try card.send(ins: 0xA4, p1: 0x04, p2: 0x00, data: app, le: 0)
-            print(selectApp)
+            // Select the OATH application on the smart card
+            let selectApp = try card.send(apdu: SelectApplicationAPDU(application: .oath))
             
             guard selectApp.sw == APDUResult.success else {
                 print("Failed to select OATH: \(selectApp.sw)")
                 throw YubiError.notSupported
             }
             
-            // TODO: respond to challenge if requested
+            // TODO: respond to challenge if requested ?
             
-            // Request codes
-            let calculateAll = try card.send(ins: 0xA4, p1: 0x00, p2: 0x01, data: challenge, le: 0)
-            print(calculateAll.sw, calculateAll.response)
+            // Calculate all OATH codes
+            let calculateAll = try card.send(apdu: CalculateAllAPDU(truncated: true, timestamp: Date().timeIntervalSince1970))
             
             if calculateAll.sw >> 8 == APDUResult.moreData {
                 print("TODO: More data to send...")
@@ -165,20 +153,22 @@ class Yubi: ObservableObject {
                 throw YubiError.notSupported
             }
             
-            return [AuthCode](AuthCodeParser(data: calculateAll.response))
-            
-//            if statusCode == 0x77 {
-//                print("TODO: HTOP response")
-//            }
-//            if statusCode == 0x7c {
-//                print("TODO: Touch required")
-//            }
-            
+            return calculateAll.response
         }
         
-        return codes.sorted { a, b in
-            return a.account < b.account
+        var output: OrderedDictionary<String, [AuthCode]> = [:]
+        
+        for code in AuthCodeParser(data: oathCodesData) {
+            if let existing = output[code.issuer] {
+                output[code.issuer] = existing + [code]
+            } else {
+                output[code.issuer] = [code]
+            }
         }
+        
+        output.sort()
+        
+        return output
     }
 }
 
@@ -223,23 +213,47 @@ struct AuthCodeParser: Sequence, IteratorProtocol {
             return nil
         }
         
-//        let account = name.replacing(/:/, with: " - ")
+        let parts = name.split(separator: /:/)
+        let issuer = String(parts.first != nil ? String(parts.first!) : "Unknown")
+        let account = parts.last != nil ? String(parts.last!) : ""
         
         return (
-            AuthCode(account: name, otp: otp, type: type),
+            AuthCode(issuer: issuer, account: account, otp: otp, type: type),
             4 + nameLength + responseLength
         )
     }
 }
 
+struct OathCodeRow: View {
+    let issuer: String
+    let oathCodes: [AuthCode]
+    
+    var body: some View {
+        if oathCodes.count == 1 {
+            Button(issuer) {
+                copy(text: "\(oathCodes.first!.otp)")
+            }
+        } else {
+            Menu {
+                ForEach(oathCodes) { code in
+                    Button(code.account) {
+                        copy(text: "\(code.otp)")
+                    }
+                }
+            } label: {
+                Text(issuer)
+            }
+        }
+    }
+    
+    func copy(text: String) {
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+    }
+}
+
 struct AppMenu: View {
     @StateObject private var yubi = Yubi()
-    
-    let timer = Timer.publish(every: 60, on: .main, in: .default).autoconnect()
-    
-    init() {
-        yubi.schedule()
-    }
     
     var body: some View {
         Button("Fetch") {
@@ -249,21 +263,14 @@ struct AppMenu: View {
         }
         Text(yubi.message)
         Group {
-            ForEach(yubi.codes) { code in
-                Button("\(code.account)") {
-                    copy(code: code)
-                }
+            ForEach(yubi.oathCodes.keys, id: \.self) { issuer in
+                OathCodeRow(issuer: issuer, oathCodes: yubi.oathCodes[issuer]!)
             }
         }
         Divider()
         Button("Quit") {
             NSApplication.shared.terminate(nil)
         }.keyboardShortcut("q")
-    }
-    
-    func copy(code: AuthCode) {
-        NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString("\(code.otp)", forType: .string)
     }
 }
 

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D41C0E652951F89C00EB4C54 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = D41C0E642951F89C00EB4C54 /* OrderedCollections */; };
+		D41C0E682952049A00EB4C54 /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E672952049A00EB4C54 /* APDU.swift */; };
+		D41C0E6A2952060100EB4C54 /* SelectApplicationAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */; };
+		D41C0E6C2952068E00EB4C54 /* CalculateAllAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */; };
 		D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */; };
 		D4258D7E293A83A100607A5B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D7D293A83A100607A5B /* ContentView.swift */; };
 		D4258D80293A83A200607A5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4258D7F293A83A200607A5B /* Assets.xcassets */; };
@@ -28,6 +32,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D41C0E672952049A00EB4C54 /* APDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APDU.swift; sourceTree = "<group>"; };
+		D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectApplicationAPDU.swift; sourceTree = "<group>"; };
+		D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateAllAPDU.swift; sourceTree = "<group>"; };
 		D4258D78293A83A100607A5B /* MiniYubiOath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiniYubiOath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniYubiOathApp.swift; sourceTree = "<group>"; };
 		D4258D7D293A83A100607A5B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,12 +51,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D41C0E652951F89C00EB4C54 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D41C0E662952047400EB4C54 /* SmartCard */ = {
+			isa = PBXGroup;
+			children = (
+				D41C0E672952049A00EB4C54 /* APDU.swift */,
+				D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */,
+				D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */,
+			);
+			path = SmartCard;
+			sourceTree = "<group>";
+		};
+		D41C0E6F295212AA00EB4C54 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		D4258D6F293A83A100607A5B = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +95,8 @@
 		D4258D7A293A83A100607A5B /* MiniYubiOath */ = {
 			isa = PBXGroup;
 			children = (
+				D41C0E6F295212AA00EB4C54 /* UI */,
+				D41C0E662952047400EB4C54 /* SmartCard */,
 				D4988924293E9195003955E0 /* Info.plist */,
 				D4258D8A293A859500607A5B /* AppMenu.swift */,
 				D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */,
@@ -115,6 +142,7 @@
 			);
 			name = MiniYubiOath;
 			packageProductDependencies = (
+				D41C0E642951F89C00EB4C54 /* OrderedCollections */,
 			);
 			productName = MiniYubiOath;
 			productReference = D4258D78293A83A100607A5B /* MiniYubiOath.app */;
@@ -145,6 +173,7 @@
 			);
 			mainGroup = D4258D6F293A83A100607A5B;
 			packageReferences = (
+				D41C0E632951F89C00EB4C54 /* XCRemoteSwiftPackageReference "swift-collections" */,
 			);
 			productRefGroup = D4258D79293A83A100607A5B /* Products */;
 			projectDirPath = "";
@@ -175,6 +204,9 @@
 				D4258D8B293A859500607A5B /* AppMenu.swift in Sources */,
 				D4258D7E293A83A100607A5B /* ContentView.swift in Sources */,
 				D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */,
+				D41C0E6A2952060100EB4C54 /* SelectApplicationAPDU.swift in Sources */,
+				D41C0E6C2952068E00EB4C54 /* CalculateAllAPDU.swift in Sources */,
+				D41C0E682952049A00EB4C54 /* APDU.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -376,6 +408,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D41C0E632951F89C00EB4C54 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D41C0E642951F89C00EB4C54 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D41C0E632951F89C00EB4C54 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D4258D70293A83A100607A5B /* Project object */;
 }
