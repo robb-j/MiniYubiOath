@@ -36,3 +36,14 @@ struct OathCodeItem: View {
     }
 }
 
+struct OathCodeItem_Previews: PreviewProvider {
+    static var previews: some View {
+        OathCodeItem(issuer: "Duck", oathCodes: [
+            OathCode(issuer: "Duck", account: "geoff-t", otp: "123456", type: .truncated),
+            OathCode(issuer: "Duck", account: "jess-s", otp: "123456", type: .truncated)
+        ])
+        OathCodeItem(issuer: "GitHub", oathCodes: [
+            OathCode(issuer: "GitHub", account: "geoff-t", otp: "123456", type: .truncated)
+        ])
+    }
+}
