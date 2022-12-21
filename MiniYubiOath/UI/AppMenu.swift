@@ -11,9 +11,12 @@ struct AppMenu: View {
     @EnvironmentObject private var yubi: Yubi
     @Environment(\.openWindow) private var openWindow
     
+    let helpUrl = URL(string: "https://github.com/robb-j/MiniYubiOath/issues")
+    let yubicoAuthenticatorUrl = NSWorkspace.shared.urlForApplication(withBundleIdentifier: "com.yubico.yubioath")
+    
     var body: some View {
         if yubi.state != .success {
-            Button("Fetch") {
+            Button("Retry") {
                 Task { await yubi.update() }
             }
             Text(yubi.state.getMessage())
@@ -25,6 +28,16 @@ struct AppMenu: View {
             }
         }
         Divider()
+        if yubicoAuthenticatorUrl != nil {
+            Button("Open Yubico Authenticator") {
+                NSWorkspace.shared.openApplication(at: yubicoAuthenticatorUrl!, configuration: NSWorkspace.OpenConfiguration())
+            }
+        }
+        if helpUrl != nil {
+            Button("Get help") {
+                NSWorkspace.shared.open(helpUrl!)
+            }
+        }
         Button("About") {
             openWindow(id: "about")
         }
