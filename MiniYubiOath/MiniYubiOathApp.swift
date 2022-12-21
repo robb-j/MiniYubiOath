@@ -15,7 +15,10 @@ import SwiftUI
 
 @main
 struct MiniYubiOathApp: App {
-    @StateObject private var yubi = Yubi().setup()
+    
+    // Toggle these to swap implementations for development
+    @StateObject private var yubi: OathStore = SmartCardYubi().setup()
+    // @StateObject private var yubi: OathStore = MockOathStore()
     
     var body: some Scene {
         MenuBarExtra("Yoath", image: "StatusBarImage") {

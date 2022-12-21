@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AppMenu: View {
-    @EnvironmentObject private var yubi: Yubi
+    @EnvironmentObject private var yubi: OathStore
     @Environment(\.openWindow) private var openWindow
     
     let helpUrl = URL(string: "https://github.com/robb-j/MiniYubiOath/issues")

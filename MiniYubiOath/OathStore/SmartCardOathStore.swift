@@ -1,8 +1,8 @@
 //
-//  Yubi.swift
-//  MiniYubiOath
+//  SmartCardOathStore.swift
+//  Yoath
 //
-//  Created by Rob Anderson on 20/12/2022.
+//  Created by Rob Anderson on 21/12/2022.
 //
 
 import Foundation
@@ -16,56 +16,17 @@ struct APDUResult {
     static let moreData = 0x61 // 0x61XX
 }
 
-
-struct APDUTag {
-    static let name = 0x71
-}
-
-
-@MainActor
-class Yubi: ObservableObject {
-    @Published private(set) var oathCodes: OrderedDictionary<String, [OathCode]> = [:]
-    @Published private(set) var state = State.loading
-    
+final class SmartCardYubi: OathStore {
     private(set) var timer: Timer?
     private(set) var slotObservation: NSKeyValueObservation?
     
-    enum SmartCardError: Error {
-        case notSupported
-        case notConnected
-        case cannotStart
-        case unknown
-        
-        func getMessage() -> String {
-            switch self {
-            case .notSupported: return "Unsupported YubiKey"
-            case .notConnected: return "Not connected"
-            case .cannotStart: return "Failed to connect"
-            case .unknown: return "Something went wrong"
-            }
-        }
-    }
-    enum State: Equatable {
-        case loading
-        case success
-        case error(SmartCardError)
-        
-        func getMessage() -> String {
-            switch self {
-            case .loading: return "Loading…"
-            case .success: return "Connected"
-            case .error(let error): return error.getMessage()
-            }
-        }
-    }
-    
-    func update() async {
+    override func update() async {
         state = .loading
         oathCodes = [:]
         do {
             oathCodes = try await readYubiKey()
             state = .success
-        } catch let error as SmartCardError {
+        } catch let error as OathError {
             state = .error(error)
         } catch {
             print(error)
@@ -102,7 +63,7 @@ class Yubi: ObservableObject {
             
             guard selectApp.sw == APDUResult.success else {
                 print("Failed to select OATH: \(selectApp.sw)")
-                throw SmartCardError.notSupported
+                throw OathError.notSupported
             }
             
             // Calculate all OATH codes
@@ -114,7 +75,7 @@ class Yubi: ObservableObject {
             
             guard calculateAll.sw == APDUResult.success else {
                 print("Calculate all failed: \(calculateAll.sw)")
-                throw SmartCardError.notSupported
+                throw OathError.notSupported
             }
             
             return calculateAll.response
@@ -139,14 +100,14 @@ class Yubi: ObservableObject {
     
     func runTask<T>(block: (TKSmartCard) async throws -> T) async throws -> T {
         guard let manager = TKSmartCardSlotManager.default else {
-            throw SmartCardError.notSupported
+            throw OathError.notSupported
         }
         guard let yubi = manager.slotNames.first(where: { $0.contains("YubiKey") }) else {
-            throw SmartCardError.notConnected
+            throw OathError.notConnected
         }
         
-        guard let slot = manager.slotNamed(yubi) else { throw SmartCardError.notConnected }
-        guard let card = slot.makeSmartCard() else { throw SmartCardError.notConnected }
+        guard let slot = manager.slotNamed(yubi) else { throw OathError.notConnected }
+        guard let card = slot.makeSmartCard() else { throw OathError.notConnected }
         
         switch slot.state {
         case .missing:
@@ -167,7 +128,7 @@ class Yubi: ObservableObject {
 //        card.useCommandChaining = false
         
         let connected = try await card.beginSession()
-        if !connected { throw SmartCardError.cannotStart }
+        if !connected { throw OathError.cannotStart }
         
         defer {
             card.endSession()

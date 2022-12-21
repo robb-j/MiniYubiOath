@@ -14,7 +14,7 @@
 		D41C0E73295213E200EB4C54 /* AuthCodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E72295213E200EB4C54 /* AuthCodeParser.swift */; };
 		D41C0E752952143500EB4C54 /* OathCodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E742952143500EB4C54 /* OathCodeItem.swift */; };
 		D41C0E782952159900EB4C54 /* OathCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E772952159900EB4C54 /* OathCode.swift */; };
-		D41C0E7A2952182100EB4C54 /* Yubi.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E792952182100EB4C54 /* Yubi.swift */; };
+		D41C0E7A2952182100EB4C54 /* OathStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E792952182100EB4C54 /* OathStore.swift */; };
 		D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */; };
 		D4258D80293A83A200607A5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4258D7F293A83A200607A5B /* Assets.xcassets */; };
 		D4258D83293A83A200607A5B /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4258D82293A83A200607A5B /* Preview Assets.xcassets */; };
@@ -23,6 +23,8 @@
 		D4E8CBEE29527D450022CF07 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CBEB29527D440022CF07 /* README.md */; };
 		D4E8CBEF29527D450022CF07 /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CBEC29527D440022CF07 /* CHANGELOG.md */; };
 		D4E8CBF029527D450022CF07 /* PRIVACY.md in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CBED29527D440022CF07 /* PRIVACY.md */; };
+		D4E8CBF2295321790022CF07 /* MockOathStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CBF1295321790022CF07 /* MockOathStore.swift */; };
+		D4E8CBF5295327140022CF07 /* SmartCardOathStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CBF4295327140022CF07 /* SmartCardOathStore.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,7 +47,7 @@
 		D41C0E72295213E200EB4C54 /* AuthCodeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCodeParser.swift; sourceTree = "<group>"; };
 		D41C0E742952143500EB4C54 /* OathCodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCodeItem.swift; sourceTree = "<group>"; };
 		D41C0E772952159900EB4C54 /* OathCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCode.swift; sourceTree = "<group>"; };
-		D41C0E792952182100EB4C54 /* Yubi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yubi.swift; sourceTree = "<group>"; };
+		D41C0E792952182100EB4C54 /* OathStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathStore.swift; sourceTree = "<group>"; };
 		D4258D78293A83A100607A5B /* Yoath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yoath.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiniYubiOathApp.swift; sourceTree = "<group>"; };
 		D4258D7F293A83A200607A5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +60,8 @@
 		D4E8CBEB29527D440022CF07 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D4E8CBEC29527D440022CF07 /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = CHANGELOG.md; sourceTree = "<group>"; };
 		D4E8CBED29527D440022CF07 /* PRIVACY.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY.md; sourceTree = "<group>"; };
+		D4E8CBF1295321790022CF07 /* MockOathStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOathStore.swift; sourceTree = "<group>"; };
+		D4E8CBF4295327140022CF07 /* SmartCardOathStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCardOathStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,11 +128,11 @@
 		D4258D7A293A83A100607A5B /* MiniYubiOath */ = {
 			isa = PBXGroup;
 			children = (
+				D4E8CBF3295326C40022CF07 /* OathStore */,
 				D41C0E762952155100EB4C54 /* Models */,
 				D41C0E6F295212AA00EB4C54 /* UI */,
 				D41C0E662952047400EB4C54 /* SmartCard */,
 				D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */,
-				D41C0E792952182100EB4C54 /* Yubi.swift */,
 				D4988924293E9195003955E0 /* Info.plist */,
 				D4258D7F293A83A200607A5B /* Assets.xcassets */,
 				D4258D84293A83A200607A5B /* MiniYubiOath.entitlements */,
@@ -151,6 +155,16 @@
 				D4A4B7BC293B82D60092ECC9 /* DriverKit.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D4E8CBF3295326C40022CF07 /* OathStore */ = {
+			isa = PBXGroup;
+			children = (
+				D4E8CBF1295321790022CF07 /* MockOathStore.swift */,
+				D41C0E792952182100EB4C54 /* OathStore.swift */,
+				D4E8CBF4295327140022CF07 /* SmartCardOathStore.swift */,
+			);
+			path = OathStore;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,10 +247,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D41C0E7A2952182100EB4C54 /* Yubi.swift in Sources */,
+				D41C0E7A2952182100EB4C54 /* OathStore.swift in Sources */,
 				D4258D8B293A859500607A5B /* AppMenu.swift in Sources */,
 				D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */,
+				D4E8CBF2295321790022CF07 /* MockOathStore.swift in Sources */,
 				D41C0E752952143500EB4C54 /* OathCodeItem.swift in Sources */,
+				D4E8CBF5295327140022CF07 /* SmartCardOathStore.swift in Sources */,
 				D41C0E782952159900EB4C54 /* OathCode.swift in Sources */,
 				D41C0E6A2952060100EB4C54 /* SelectApplicationAPDU.swift in Sources */,
 				D41C0E6C2952068E00EB4C54 /* CalculateAllAPDU.swift in Sources */,
