@@ -26,7 +26,9 @@ struct APDUTag {
 class Yubi: ObservableObject {
     @Published private(set) var oathCodes: OrderedDictionary<String, [OathCode]> = [:]
     @Published private(set) var state = State.loading
-    var timer: Timer?
+    
+    private(set) var timer: Timer?
+    private(set) var slotObservation: NSKeyValueObservation?
     
     enum SmartCardError: Error {
         case notSupported
@@ -71,14 +73,24 @@ class Yubi: ObservableObject {
         }
     }
     
-    func schedule() -> Self {
+    func setup() -> Self {
+        guard let manager = TKSmartCardSlotManager.default, timer == nil, slotObservation == nil else { return self }
+        
+        // Initially fetch data
+        Task { await update() }
+        
+        // Setup timers
         let startDate = Date(timeIntervalSince1970: ceil(Date().timeIntervalSince1970 / 30) * 30)
-
-        let timer = Timer(fire: startDate, interval: 30, repeats: true) { timer in
+        timer = Timer(fire: startDate, interval: 30, repeats: true) { timer in
             Task { await self.update() }
         }
-        RunLoop.current.add(timer, forMode: .default)
-        self.timer = timer
+        RunLoop.current.add(timer!, forMode: .default)
+        
+        // Listen for new/removed cards
+        slotObservation = manager.observe(\.slotNames) { manager, slotNames in
+            Task { await self.update() }
+        }
+        
         return self
     }
     
