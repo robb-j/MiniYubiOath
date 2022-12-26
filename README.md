@@ -6,10 +6,8 @@ Quickly grab OATH TOTP two-factor codes on a YubiKey from the status bar.
 
 I make apps that I use regularly and I like high-quality apps.
 You can get this for free by downloading the release from GitHub,
-or you can support development by buying the app on the _App Store_
+or you can support development by buying the app on the [App Store](https://apps.apple.com/gb/app/yoath/id1660931205)
 and you get automatic updates.
-
-> TODO: fill in App Store link when released.
 
 ## Install
 
