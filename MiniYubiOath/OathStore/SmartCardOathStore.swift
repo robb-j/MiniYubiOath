@@ -49,7 +49,10 @@ final class SmartCardYubi: OathStore {
         
         // Listen for new/removed cards
         slotObservation = manager.observe(\.slotNames) { manager, slotNames in
-            Task { await self.update() }
+            Task {
+                try? await Task.sleep(for: .milliseconds(500))
+                await self.update()
+            }
         }
         
         return self

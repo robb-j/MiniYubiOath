@@ -2,6 +2,10 @@
 
 Notable features, fixes and updates are logged in this file.
 
+## _next_
+
+* Improve first-connection, adds a short delay after plugging in before fetching codes
+
 ## 0.2.0
 
 * Add "Get help" menu option to start a GitHub issue
