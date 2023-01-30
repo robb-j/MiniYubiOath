@@ -17,7 +17,7 @@ struct AppMenu: View {
     var body: some View {
         if yubi.state != .success {
             Button("Retry") {
-                Task { await yubi.update() }
+                Task { await yubi.updateList() }
             }
             Text(yubi.state.getMessage())
             Divider()
@@ -25,9 +25,15 @@ struct AppMenu: View {
         Group {
             ForEach(yubi.oathCodes.keys, id: \.self) { issuer in
                 OathCodeItem(issuer: issuer, oathCodes: yubi.oathCodes[issuer]!)
+                    .environmentObject(yubi)
             }
         }
         Divider()
+        if yubi.state == .success {
+            Button("Refresh list") {
+                Task { await yubi.updateList() }
+            }
+        }
         if yubicoAuthenticatorUrl != nil {
             Button("Open Yubico Authenticator") {
                 NSWorkspace.shared.openApplication(at: yubicoAuthenticatorUrl!, configuration: NSWorkspace.OpenConfiguration())

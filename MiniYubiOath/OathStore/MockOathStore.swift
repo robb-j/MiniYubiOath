@@ -42,5 +42,7 @@ final class MockOathStore: OathStore {
         ]
     }
     
-    override func update() async {}
+    // override func updateList() async {}
+    
+    // override func getCode(account: String) async -> String? { }
 }

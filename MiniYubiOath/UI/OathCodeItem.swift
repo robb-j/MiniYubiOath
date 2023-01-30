@@ -9,19 +9,21 @@ import Foundation
 import SwiftUI
 
 struct OathCodeItem: View {
+    @EnvironmentObject private var yubi: OathStore
+    
     let issuer: String
     let oathCodes: [OathCode]
     
     var body: some View {
         if oathCodes.count == 1 {
             Button(issuer) {
-                copy(text: oathCodes.first!.otp)
+                chosen(code: oathCodes.first!)
             }
         } else {
             Menu {
                 ForEach(oathCodes) { code in
                     Button(code.account) {
-                        copy(text: code.otp)
+                        chosen(code: code)
                     }
                 }
             } label: {
@@ -30,9 +32,15 @@ struct OathCodeItem: View {
         }
     }
     
-    func copy(text: String) {
-        NSPasteboard.general.clearContents()
-        NSPasteboard.general.setString(text, forType: .string)
+    func chosen(code: OathCode) {
+        Task {
+            guard let code = await yubi.getCode(account: oathCodes.first!.account) else {
+                print("Cannot calculate code...")
+                return
+            }
+            NSPasteboard.general.clearContents()
+            NSPasteboard.general.setString(code, forType: .string)
+        }
     }
 }
 
