@@ -35,9 +35,9 @@ final class SmartCardYubi: OathStore {
         }
     }
     
-    override func getCode(account: String) async -> String? {
+    override func getCode(account: String, issuer: String) async -> String? {
         do {
-            return try await readCode(account: account)
+            return try await readCode(account: account, issuer: issuer)
         } catch {
             print("\(error)")
         }
@@ -86,11 +86,11 @@ final class SmartCardYubi: OathStore {
     }
     
     // TODO: this could be optimised to do a single "Calculate" command
-    func readCode(account: String) async throws -> String? {
+    func readCode(account: String, issuer: String) async throws -> String? {
         let oathCodesData = try await runTask { try await self.calculateAll(card: $0) }
         
         for code in AuthCodeParser(data: oathCodesData) {
-            if code.account == account {
+            if code.account == account && code.issuer == issuer {
                 return code.otp
             }
         }

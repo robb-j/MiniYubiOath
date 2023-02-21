@@ -34,7 +34,7 @@ struct OathCodeItem: View {
     
     func chosen(code: OathCode) {
         Task {
-            guard let code = await yubi.getCode(account: oathCodes.first!.account) else {
+            guard let code = await yubi.getCode(account: code.account, issuer: code.issuer) else {
                 print("Cannot calculate code...")
                 return
             }

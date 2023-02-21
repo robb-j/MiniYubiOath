@@ -52,7 +52,7 @@ class OathStore: ObservableObject {
     
     func updateList() async {}
     
-    func getCode(account: String) async -> String? {
+    func getCode(account: String, issuer: String) async -> String? {
         return nil
     }
 }
