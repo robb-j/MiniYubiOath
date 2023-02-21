@@ -11,8 +11,8 @@
 		D41C0E682952049A00EB4C54 /* APDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E672952049A00EB4C54 /* APDU.swift */; };
 		D41C0E6A2952060100EB4C54 /* SelectApplicationAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */; };
 		D41C0E6C2952068E00EB4C54 /* CalculateAllAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */; };
-		D41C0E73295213E200EB4C54 /* AuthCodeParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E72295213E200EB4C54 /* AuthCodeParser.swift */; };
-		D41C0E752952143500EB4C54 /* OathCodeItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E742952143500EB4C54 /* OathCodeItem.swift */; };
+		D41C0E73295213E200EB4C54 /* CalculateAllParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E72295213E200EB4C54 /* CalculateAllParser.swift */; };
+		D41C0E752952143500EB4C54 /* CredentialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E742952143500EB4C54 /* CredentialView.swift */; };
 		D41C0E782952159900EB4C54 /* OathCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E772952159900EB4C54 /* OathCode.swift */; };
 		D41C0E7A2952182100EB4C54 /* OathStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41C0E792952182100EB4C54 /* OathStore.swift */; };
 		D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */; };
@@ -25,6 +25,13 @@
 		D4E8CBF029527D450022CF07 /* PRIVACY.md in Resources */ = {isa = PBXBuildFile; fileRef = D4E8CBED29527D440022CF07 /* PRIVACY.md */; };
 		D4E8CBF2295321790022CF07 /* MockOathStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CBF1295321790022CF07 /* MockOathStore.swift */; };
 		D4E8CBF5295327140022CF07 /* SmartCardOathStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4E8CBF4295327140022CF07 /* SmartCardOathStore.swift */; };
+		D4FC142C29A4F52C00895CB1 /* ListAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC142B29A4F52C00895CB1 /* ListAPDU.swift */; };
+		D4FC142E29A4F7A900895CB1 /* ListCredentialsParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC142D29A4F7A900895CB1 /* ListCredentialsParser.swift */; };
+		D4FC143029A5018C00895CB1 /* OathCredential.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC142F29A5018C00895CB1 /* OathCredential.swift */; };
+		D4FC143229A506FD00895CB1 /* CalculateAPDU.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC143129A506FD00895CB1 /* CalculateAPDU.swift */; };
+		D4FC143429A5138F00895CB1 /* CalculateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC143329A5138F00895CB1 /* CalculateParser.swift */; };
+		D4FC143729A515AF00895CB1 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC143629A515AF00895CB1 /* TimeInterval.swift */; };
+		D4FC143929A5160600895CB1 /* TKSmartCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FC143829A5160600895CB1 /* TKSmartCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -44,8 +51,8 @@
 		D41C0E672952049A00EB4C54 /* APDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APDU.swift; sourceTree = "<group>"; };
 		D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectApplicationAPDU.swift; sourceTree = "<group>"; };
 		D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateAllAPDU.swift; sourceTree = "<group>"; };
-		D41C0E72295213E200EB4C54 /* AuthCodeParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCodeParser.swift; sourceTree = "<group>"; };
-		D41C0E742952143500EB4C54 /* OathCodeItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCodeItem.swift; sourceTree = "<group>"; };
+		D41C0E72295213E200EB4C54 /* CalculateAllParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateAllParser.swift; sourceTree = "<group>"; };
+		D41C0E742952143500EB4C54 /* CredentialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredentialView.swift; sourceTree = "<group>"; };
 		D41C0E772952159900EB4C54 /* OathCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCode.swift; sourceTree = "<group>"; };
 		D41C0E792952182100EB4C54 /* OathStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathStore.swift; sourceTree = "<group>"; };
 		D4258D78293A83A100607A5B /* Yoath.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Yoath.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,7 +61,7 @@
 		D4258D82293A83A200607A5B /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D4258D84293A83A200607A5B /* MiniYubiOath.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MiniYubiOath.entitlements; sourceTree = "<group>"; };
 		D4258D8A293A859500607A5B /* AppMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenu.swift; sourceTree = "<group>"; };
-		D4988924293E9195003955E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		D4988924293E9195003955E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4A4B7BC293B82D60092ECC9 /* DriverKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DriverKit.framework; path = System/Library/Frameworks/DriverKit.framework; sourceTree = SDKROOT; };
 		D4E8CBE929526DA70022CF07 /* About.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = About.swift; sourceTree = "<group>"; };
 		D4E8CBEB29527D440022CF07 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -62,6 +69,13 @@
 		D4E8CBED29527D440022CF07 /* PRIVACY.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = PRIVACY.md; sourceTree = "<group>"; };
 		D4E8CBF1295321790022CF07 /* MockOathStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockOathStore.swift; sourceTree = "<group>"; };
 		D4E8CBF4295327140022CF07 /* SmartCardOathStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SmartCardOathStore.swift; sourceTree = "<group>"; };
+		D4FC142B29A4F52C00895CB1 /* ListAPDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListAPDU.swift; sourceTree = "<group>"; };
+		D4FC142D29A4F7A900895CB1 /* ListCredentialsParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCredentialsParser.swift; sourceTree = "<group>"; };
+		D4FC142F29A5018C00895CB1 /* OathCredential.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OathCredential.swift; sourceTree = "<group>"; };
+		D4FC143129A506FD00895CB1 /* CalculateAPDU.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateAPDU.swift; sourceTree = "<group>"; };
+		D4FC143329A5138F00895CB1 /* CalculateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalculateParser.swift; sourceTree = "<group>"; };
+		D4FC143629A515AF00895CB1 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		D4FC143829A5160600895CB1 /* TKSmartCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TKSmartCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,9 +94,13 @@
 			isa = PBXGroup;
 			children = (
 				D41C0E672952049A00EB4C54 /* APDU.swift */,
-				D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */,
 				D41C0E6B2952068E00EB4C54 /* CalculateAllAPDU.swift */,
-				D41C0E72295213E200EB4C54 /* AuthCodeParser.swift */,
+				D41C0E72295213E200EB4C54 /* CalculateAllParser.swift */,
+				D4FC143129A506FD00895CB1 /* CalculateAPDU.swift */,
+				D4FC143329A5138F00895CB1 /* CalculateParser.swift */,
+				D4FC142B29A4F52C00895CB1 /* ListAPDU.swift */,
+				D4FC142D29A4F7A900895CB1 /* ListCredentialsParser.swift */,
+				D41C0E692952060100EB4C54 /* SelectApplicationAPDU.swift */,
 			);
 			path = SmartCard;
 			sourceTree = "<group>";
@@ -92,7 +110,7 @@
 			children = (
 				D4E8CBE929526DA70022CF07 /* About.swift */,
 				D4258D8A293A859500607A5B /* AppMenu.swift */,
-				D41C0E742952143500EB4C54 /* OathCodeItem.swift */,
+				D41C0E742952143500EB4C54 /* CredentialView.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -101,6 +119,7 @@
 			isa = PBXGroup;
 			children = (
 				D41C0E772952159900EB4C54 /* OathCode.swift */,
+				D4FC142F29A5018C00895CB1 /* OathCredential.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -128,15 +147,16 @@
 		D4258D7A293A83A100607A5B /* MiniYubiOath */ = {
 			isa = PBXGroup;
 			children = (
-				D4E8CBF3295326C40022CF07 /* OathStore */,
 				D41C0E762952155100EB4C54 /* Models */,
 				D41C0E6F295212AA00EB4C54 /* UI */,
+				D4E8CBF3295326C40022CF07 /* OathStore */,
 				D41C0E662952047400EB4C54 /* SmartCard */,
-				D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */,
-				D4988924293E9195003955E0 /* Info.plist */,
-				D4258D7F293A83A200607A5B /* Assets.xcassets */,
-				D4258D84293A83A200607A5B /* MiniYubiOath.entitlements */,
+				D4FC143529A5159A00895CB1 /* Extensions */,
 				D4258D81293A83A200607A5B /* Preview Content */,
+				D4258D7F293A83A200607A5B /* Assets.xcassets */,
+				D4988924293E9195003955E0 /* Info.plist */,
+				D4258D84293A83A200607A5B /* MiniYubiOath.entitlements */,
+				D4258D7B293A83A100607A5B /* MiniYubiOathApp.swift */,
 			);
 			path = MiniYubiOath;
 			sourceTree = "<group>";
@@ -165,6 +185,15 @@
 				D4E8CBF4295327140022CF07 /* SmartCardOathStore.swift */,
 			);
 			path = OathStore;
+			sourceTree = "<group>";
+		};
+		D4FC143529A5159A00895CB1 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D4FC143629A515AF00895CB1 /* TimeInterval.swift */,
+				D4FC143829A5160600895CB1 /* TKSmartCard.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -247,18 +276,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4FC143029A5018C00895CB1 /* OathCredential.swift in Sources */,
+				D4FC143729A515AF00895CB1 /* TimeInterval.swift in Sources */,
 				D41C0E7A2952182100EB4C54 /* OathStore.swift in Sources */,
 				D4258D8B293A859500607A5B /* AppMenu.swift in Sources */,
+				D4FC143429A5138F00895CB1 /* CalculateParser.swift in Sources */,
 				D4258D7C293A83A100607A5B /* MiniYubiOathApp.swift in Sources */,
 				D4E8CBF2295321790022CF07 /* MockOathStore.swift in Sources */,
-				D41C0E752952143500EB4C54 /* OathCodeItem.swift in Sources */,
+				D41C0E752952143500EB4C54 /* CredentialView.swift in Sources */,
+				D4FC143229A506FD00895CB1 /* CalculateAPDU.swift in Sources */,
 				D4E8CBF5295327140022CF07 /* SmartCardOathStore.swift in Sources */,
+				D4FC143929A5160600895CB1 /* TKSmartCard.swift in Sources */,
+				D4FC142C29A4F52C00895CB1 /* ListAPDU.swift in Sources */,
 				D41C0E782952159900EB4C54 /* OathCode.swift in Sources */,
+				D4FC142E29A4F7A900895CB1 /* ListCredentialsParser.swift in Sources */,
 				D41C0E6A2952060100EB4C54 /* SelectApplicationAPDU.swift in Sources */,
 				D41C0E6C2952068E00EB4C54 /* CalculateAllAPDU.swift in Sources */,
 				D4E8CBEA29526DA70022CF07 /* About.swift in Sources */,
 				D41C0E682952049A00EB4C54 /* APDU.swift in Sources */,
-				D41C0E73295213E200EB4C54 /* AuthCodeParser.swift in Sources */,
+				D41C0E73295213E200EB4C54 /* CalculateAllParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -16,12 +16,6 @@ protocol APDU {
     var data: Data? { get }
 }
 
-extension TKSmartCard {
-    func send(apdu: APDU) throws -> (sw: UInt16, response: Data) {
-        return try send(ins: apdu.ins, p1: apdu.p1, p2: apdu.p2, data: apdu.data, le: 0)
-    }
-}
-
 extension APDU {
     func sendTo(card: TKSmartCard) throws -> (sw: UInt16, response: Data) {
         return try card.send(ins: ins, p1: p1, p2: p2, data: data, le: 0)

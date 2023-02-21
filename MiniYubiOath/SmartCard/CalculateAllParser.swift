@@ -1,5 +1,5 @@
 //
-//  AuthCodeParser.swift
+//  CalculateAllParser.swift
 //  MiniYubiOath
 //
 //  Created by Rob Anderson on 20/12/2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AuthCodeParser: Sequence, IteratorProtocol {
+struct CalculateAllParser: Sequence, IteratorProtocol {
     typealias Element = OathCode
     
     var data: Data
@@ -20,7 +20,7 @@ struct AuthCodeParser: Sequence, IteratorProtocol {
     }
     
     func parseCode(_ data: Data) -> (OathCode, Int)? {
-        guard data[0] == APDUTag.name else { return nil }
+        guard data[0] == 0x71 else { return nil }
         
         let nameLength = Int(data[1])
         guard let name = String(data: data[2 ..< (nameLength + 2)], encoding: .utf8) else { return nil }

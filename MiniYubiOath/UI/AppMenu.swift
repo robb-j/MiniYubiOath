@@ -23,8 +23,8 @@ struct AppMenu: View {
             Divider()
         }
         Group {
-            ForEach(yubi.oathCodes.keys, id: \.self) { issuer in
-                OathCodeItem(issuer: issuer, oathCodes: yubi.oathCodes[issuer]!)
+            ForEach(yubi.items.keys, id: \.self) { issuer in
+                CredentialView(issuer: issuer, credentials: yubi.items[issuer]!)
                     .environmentObject(yubi)
             }
         }

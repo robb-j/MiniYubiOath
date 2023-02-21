@@ -1,5 +1,5 @@
 //
-//  OathCodeItem.swift
+//  CredentialView.swift
 //  MiniYubiOath
 //
 //  Created by Rob Anderson on 20/12/2022.
@@ -8,22 +8,22 @@
 import Foundation
 import SwiftUI
 
-struct OathCodeItem: View {
+struct CredentialView: View {
     @EnvironmentObject private var yubi: OathStore
     
     let issuer: String
-    let oathCodes: [OathCode]
+    let credentials: [OathCredential]
     
     var body: some View {
-        if oathCodes.count == 1 {
+        if credentials.count == 1 {
             Button(issuer) {
-                chosen(code: oathCodes.first!)
+                chosen(credentials.first!)
             }
         } else {
             Menu {
-                ForEach(oathCodes) { code in
+                ForEach(credentials) { code in
                     Button(code.account) {
-                        chosen(code: code)
+                        chosen(code)
                     }
                 }
             } label: {
@@ -32,9 +32,9 @@ struct OathCodeItem: View {
         }
     }
     
-    func chosen(code: OathCode) {
+    func chosen(_ credential: OathCredential) {
         Task {
-            guard let code = await yubi.getCode(account: code.account, issuer: code.issuer) else {
+            guard let code = await yubi.getCode(credential: credential) else {
                 print("Cannot calculate code...")
                 return
             }
@@ -46,12 +46,12 @@ struct OathCodeItem: View {
 
 struct OathCodeItem_Previews: PreviewProvider {
     static var previews: some View {
-        OathCodeItem(issuer: "Duck", oathCodes: [
-            OathCode(issuer: "Duck", account: "geoff-t", otp: "123456", type: .truncated),
-            OathCode(issuer: "Duck", account: "jess-s", otp: "123456", type: .truncated)
+        CredentialView(issuer: "Duck", credentials: [
+            OathCredential.mock(issuer: "Duck", account: "geoff-t"),
+            OathCredential.mock(issuer: "Duck", account: "jess-s")
         ])
-        OathCodeItem(issuer: "GitHub", oathCodes: [
-            OathCode(issuer: "GitHub", account: "geoff-t", otp: "123456", type: .truncated)
+        CredentialView(issuer: "GitHub", credentials: [
+            OathCredential.mock(issuer: "GitHub", account: "geoff-t")
         ])
     }
 }

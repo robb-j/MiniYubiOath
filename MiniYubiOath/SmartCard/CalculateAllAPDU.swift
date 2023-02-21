@@ -7,6 +7,12 @@
 
 import Foundation
 
+// Calculate All Data
+//
+// chalTag              0x74
+// chalLen              (UInt8)
+// chalData[chalLen]    (Challenge data)
+
 class CalculateAllAPDU: APDU {
     let ins = UInt8(0xA4)
     let p1 = UInt8(0x00)
@@ -19,20 +25,8 @@ class CalculateAllAPDU: APDU {
     }
     
     static func calculateData(timestamp: TimeInterval) -> Data {
-        let chal = CFSwapInt64HostToBig(UInt64(timestamp / 30));
+        let chal = timestamp.apduData()
         
-        return Data([
-            0x74, // Data[0] / tag
-            0x08, // Data[1] / length of challenge
-            
-            UInt8((chal >>   0) & 0xFF), // Data[2] | challenge[0]
-            UInt8((chal >>   8) & 0xFF), // Data[3] | challenge[1]
-            UInt8((chal >>  16) & 0xFF), // Data[4] | challenge[2]
-            UInt8((chal >>  24) & 0xFF), // Data[5] | challenge[3]
-            UInt8((chal >>  32) & 0xFF), // Data[6] | challenge[4]
-            UInt8((chal >>  40) & 0xFF), // Data[7] | challenge[5]
-            UInt8((chal >>  48) & 0xFF), // Data[8] | challenge[6]
-            UInt8((chal >>  56) & 0xFF), // Data[9] | challenge[7]
-        ] as [UInt8])
+        return Data([UInt8(0x74), UInt8(chal.count)]) + chal
     }
 }

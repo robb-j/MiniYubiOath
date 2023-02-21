@@ -8,17 +8,12 @@
 import Foundation
 import OrderedCollections
 
-struct APDUTag {
-    static let name = 0x71
-}
-
 // SwiftUI doesn't support protocols with @EnvironmentObject,
 // so we're using inheritence to mock-out smart cards for testing and demos
 
-
 @MainActor
 class OathStore: ObservableObject {
-    @Published var oathCodes: OrderedDictionary<String, [OathCode]> = [:]
+    @Published var items: OrderedDictionary<String, [OathCredential]> = [:]
     @Published var state = State.loading
     
     enum OathError: Error {
@@ -36,6 +31,7 @@ class OathStore: ObservableObject {
             }
         }
     }
+    
     enum State: Equatable {
         case loading
         case success
@@ -52,7 +48,7 @@ class OathStore: ObservableObject {
     
     func updateList() async {}
     
-    func getCode(account: String, issuer: String) async -> String? {
+    func getCode(credential: OathCredential) async -> String? {
         return nil
     }
 }

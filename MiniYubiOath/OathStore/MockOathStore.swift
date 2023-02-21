@@ -13,36 +13,36 @@ final class MockOathStore: OathStore {
         super.init()
         
         state = .success
-        oathCodes = [
+        items = [
             "Apple": [
-                OathCode(issuer: "Apple", account: "geoff@example.com", otp: "123456", type: .truncated)
+                OathCredential.mock(issuer: "Apple", account: "geoff@example.com")
             ],
             "Amazon": [
-                OathCode(issuer: "Amazon", account: "geoff@example.com", otp: "123456", type: .truncated)
+                OathCredential.mock(issuer: "Amazon", account: "geoff@example.com")
             ],
             "DigitalOcean": [
-                OathCode(issuer: "DigitalOcean", account: "geoff@example.com", otp: "123456", type: .truncated)
+                OathCredential.mock(issuer: "DigitalOcean", account: "geoff@example.com")
             ],
             "Fathom Analytics": [
-                OathCode(issuer: "Fathom Analytics", account: "geoff@example.com", otp: "123456", type: .truncated)
+                OathCredential.mock(issuer: "Fathom Analytics", account: "geoff@example.com")
             ],
             "GitHub": [
-                OathCode(issuer: "GitHub", account: "geoff@example.com", otp: "123456", type: .truncated)
+                OathCredential.mock(issuer: "GitHub", account: "geoff@example.com")
             ],
             "Panic": [
-                OathCode(issuer: "Panic", account: "geoff@example.com", otp: "123456", type: .truncated)
+                OathCredential.mock(issuer: "Panic", account: "geoff@example.com")
             ],
             "Twitter": [
-                OathCode(issuer: "Twitter", account: "@robbb_j", otp: "123456", type: .truncated),
-                OathCode(issuer: "Twitter", account: "@g_testington", otp: "123456", type: .truncated)
+                OathCredential.mock(issuer: "Twitter", account: "@robbb_j"),
+                OathCredential.mock(issuer: "Twitter", account: "@g_testington")
             ],
             "Vercel": [
-                OathCode(issuer: "Vercel", account: "geoff@example.com", otp: "123456", type: .truncated)
+                OathCredential.mock(issuer: "Vercel", account: "geoff@example.com")
             ],
         ]
     }
     
     // override func updateList() async {}
     
-    // override func getCode(account: String) async -> String? { }
+    // override func getCode(credential: OathCredential) async -> String? { }
 }

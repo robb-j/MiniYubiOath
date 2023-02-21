@@ -23,9 +23,9 @@ final class SmartCardYubi: OathStore {
     // MARK: - public interface
     override func updateList() async {
         state = .loading
-        oathCodes = [:]
+        items = [:]
         do {
-            oathCodes = try await readYubiKey()
+            items = try await readYubiKey()
             state = .success
         } catch let error as OathError {
             state = .error(error)
@@ -35,9 +35,9 @@ final class SmartCardYubi: OathStore {
         }
     }
     
-    override func getCode(account: String, issuer: String) async -> String? {
+    override func getCode(credential: OathCredential) async -> String? {
         do {
-            return try await readCode(account: account, issuer: issuer)
+            return try await readCode(credential: credential)
         } catch {
             print("\(error)")
         }
@@ -64,17 +64,17 @@ final class SmartCardYubi: OathStore {
     
     // MARK: - Internals
     
-    // TODO: this could be optimised to do a "List" command instead
-    func readYubiKey() async throws -> OrderedDictionary<String, [OathCode]> {
-        let oathCodesData = try await runTask { try await self.calculateAll(card: $0) }
+    func readYubiKey() async throws -> OrderedDictionary<String, [OathCredential]> {
         
-        var output: OrderedDictionary<String, [OathCode]> = [:]
+        let listData = try await runTask { try await list(card: $0) }
         
-        for code in AuthCodeParser(data: oathCodesData) {
-            if let existing = output[code.issuer] {
-                output[code.issuer] = existing + [code]
+        var output: OrderedDictionary<String, [OathCredential]> = [:]
+        
+        for cred in ListCredentialsParser(data: listData) {
+            if let existing = output[cred.issuer] {
+                output[cred.issuer] = existing + [cred]
             } else {
-                output[code.issuer] = [code]
+                output[cred.issuer] = [cred]
             }
         }
         
@@ -85,28 +85,53 @@ final class SmartCardYubi: OathStore {
         return output
     }
     
-    // TODO: this could be optimised to do a single "Calculate" command
-    func readCode(account: String, issuer: String) async throws -> String? {
-        let oathCodesData = try await runTask { try await self.calculateAll(card: $0) }
+    // MARK: Card access
+    
+    func readCode(credential: OathCredential) async throws -> String? {
+        let codeData = try await runTask { try await calculate(card: $0, credential: credential) }
         
-        for code in AuthCodeParser(data: oathCodesData) {
-            if code.account == account && code.issuer == issuer {
-                return code.otp
-            }
+        guard let code = CalculateParser.parse(codeData) else {
+            return nil
         }
         
-        return nil
+        return code.code
+    }
+    
+    func list(card: TKSmartCard) async throws -> Data {
+        let list = try ListAPDU().sendTo(card: card)
+        
+        if list.sw >> 8 == APDUResult.moreData {
+            print("TODO: More data to send...")
+        }
+        
+        guard list.sw == APDUResult.success else {
+            print("list failed: \(list.sw)")
+            throw OathError.notSupported
+        }
+        
+        return list.response
+    }
+    
+    func calculate(card: TKSmartCard, credential: OathCredential) async throws -> Data {
+        let calculate = try CalculateAPDU(
+            truncated: true,
+            timestamp: Date().timeIntervalSince1970,
+            credential: credential
+        ).sendTo(card: card)
+        
+        if calculate.sw >> 8 == APDUResult.moreData {
+            print("TODO: More data to send...")
+        }
+        
+        guard calculate.sw == APDUResult.success else {
+            print("Calculate failed: \(calculate.sw)")
+            throw OathError.notSupported
+        }
+        
+        return calculate.response
     }
     
     func calculateAll(card: TKSmartCard) async throws -> Data {
-        
-        // Select the OATH application on the smart card
-        let selectApp = try SelectApplicationAPDU(application: .oath).sendTo(card: card)
-        
-        guard selectApp.sw == APDUResult.success else {
-            print("Failed to select OATH: \(selectApp.sw)")
-            throw OathError.notSupported
-        }
         
         // Calculate all OATH codes
         let calculateAll = try CalculateAllAPDU(truncated: true, timestamp: Date().timeIntervalSince1970).sendTo(card: card)
@@ -122,6 +147,8 @@ final class SmartCardYubi: OathStore {
         
         return calculateAll.response
     }
+    
+    // MARK: Utilities
     
     func runTask<T>(block: (TKSmartCard) async throws -> T) async throws -> T {
         guard let manager = TKSmartCardSlotManager.default else {
@@ -157,6 +184,14 @@ final class SmartCardYubi: OathStore {
         
         defer {
             card.endSession()
+        }
+        
+        // Select the OATH application on the smart card
+        let selectApp = try SelectApplicationAPDU(application: .oath).sendTo(card: card)
+        
+        guard selectApp.sw == APDUResult.success else {
+            print("Failed to select OATH: \(selectApp.sw)")
+            throw OathError.notSupported
         }
 
         return try await block(card)
