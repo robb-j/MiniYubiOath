@@ -2,6 +2,10 @@
 
 Notable features, fixes and updates are logged in this file.
 
+## 1.0.2
+
+Add missing app icon sizes
+
 ## 1.0.1
 
 Add missing app store category.
