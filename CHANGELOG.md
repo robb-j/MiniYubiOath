@@ -2,6 +2,10 @@
 
 Notable features, fixes and updates are logged in this file.
 
+## 1.0.0
+
+Major version release, no changes just stabilisation!
+
 ## 0.4.0
 
 Yoath communicates more intelligently than before. It uses more optimal smartcard commands to only fetch the data it needs. To fetch accounts it only lists the accounts and doesn't calculate codes which are unised. To fetch a code it only fetches the specific code it needs, rather than fetching all of them then picking the one it needs from those.
