@@ -1,6 +1,6 @@
 # Get YubiKey 2fa codes now!
 
-Quickly grab OATH TOTP two-factor codes on a YubiKey from the status bar.
+Quickly grab OATH TOTP two-factor codes on a YubiKey from your macOS status bar.
 
 ## Ethos
 
