@@ -9,7 +9,7 @@ You can get this for free by downloading the release from GitHub,
 or you can support development by buying the app on the [App Store](https://apps.apple.com/gb/app/yoath/id1660931205)
 and you get automatic updates.
 
-## Install
+## Manual install
 
 1. Find the [latest release](https://github.com/robb-j/MiniYubiOath/releases)
 2. Download and unzip the app
